@@ -1,0 +1,15 @@
+<div class="alert alert-success pull-right notification" role="alert"
+*ngIf="message.style == 'alert-success'"
+[ngClass]="{'alert-success': message.style == 'alert-success'}">
+    <h4 class="alert-heading">Success!</h4>
+    <hr>
+    <p>{{message.content}}</p>    
+  </div>
+
+<div class="alert alert-danger pull-right notification" role="alert"
+*ngIf="message.style == 'alert-danger'"
+[ngClass]="{'alert-danger': message.style == 'alert-danger'}">
+    <h4 class="alert-heading">Error!</h4>
+    <hr>
+    <p>{{message.content}}</p>    
+  </div>

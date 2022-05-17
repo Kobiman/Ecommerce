@@ -1,0 +1,107 @@
+<section class="section-content padding-y bg">
+    <div class="container">
+      <div class="card">
+        <div class="row no-gutters">
+          <aside class="col-md-6">
+            <article class="gallery-wrap">
+              <div class="img-big-wrap">
+                <a><img src="{{product.image}}"></a>
+              </div>
+
+            </article>
+          </aside>
+          <main class="col-md-6 border-left">
+            <article class="content-body">
+              <h4 class="card-title mb-4">Add New Inventory</h4>
+              <form #addinventoryform="ngForm" novalidate>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Product</label>
+                    <select name="productId" class="form-control" [(ngModel)]="product" #productId="ngModel" required>
+                      <option *ngFor="let p of products" [ngValue]=p>{{p.name}}</option>
+                    </select>
+                    <div *ngIf="productId.invalid && (productId.dirty || productId.touched)" class="alert alert-danger">
+                      <div *ngIf="productId.errors.required">
+                        Product is required.
+                      </div>
+                      <div *ngIf="productId.errors.minlength">
+                        Product name must be at least 2 characters long.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col form-group">
+                    <label>Category</label>
+                    <input name="category" type="text" class="form-control" placeholder="" [(ngModel)]="product.category" #category="ngModel"
+                           required minlength="2" [readonly]="true">
+                  </div>
+                </div>
+
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Price</label>
+                    <input name="price" type="number" class="form-control" placeholder="" [(ngModel)]="product.price" #price="ngModel"
+                           required [readonly]="true">
+                    <div *ngIf="price.invalid && (price.dirty || price.touched)" class="alert alert-danger">
+                      <div *ngIf="price.errors.required">
+                        Price is required.
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col form-group">
+                    <label>Brand</label>
+                    <input name="brand" type="text" class="form-control" placeholder="" [(ngModel)]="product.brand" #brand="ngModel"
+                           required minlength="2" [readonly]="true">
+                    <div *ngIf="brand.invalid && (brand.dirty || brand.touched)" class="alert alert-danger">
+                      <div *ngIf="brand.errors.required">
+                        Brand is required.
+                      </div>
+                      <div *ngIf="brand.errors.minlength">
+                        Brand must be at least 2 characters long.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>Description</label>
+                  <textarea name="description" type="text" class="form-control" placeholder="" [(ngModel)]="product.description" #description="ngModel"
+                            rows="2" [readonly]="true">
+                   </textarea>
+                </div>
+                <div class="form-row">
+                  <div class="col form-group">
+                    <label>Stock</label>
+                    <input name="quantity" type="number" class="form-control" placeholder="" [(ngModel)]="inventory.quantity"
+                           (change)="calculateTotalAmount(product.price,inventory.quantity)" #quantity="ngModel" required/>
+                  </div>
+                  <div class="col form-group">
+                    <label>Total Amount</label>
+                    <input name="totalAmount" type="number" class="form-control" placeholder="" [(ngModel)]="inventory.totalAmount" #totalAmount="ngModel" [readonly]="true" />
+                  </div>
+                </div>
+
+              </form>
+
+              <hr>
+              <div class="form-row">
+                <div class="col-md-2">
+                  <button *ngIf="addinventoryform.invalid && !inventory.productId" class="btn btn-primary" disabled>
+                    <span class="text">Save</span> <i class="fas fa-save"></i>
+                  </button>
+                  <button *ngIf="addinventoryform.valid && !inventory.productId" class="btn btn-primary" (click)="addInventory(inventory,addinventoryform)">
+                    <span class="text">Save</span>  <i class="fas fa-save"></i>
+                  </button>                  
+                </div>
+
+                <div class="col-md-2">
+                  <button class="btn  btn-outline-primary" [routerLink]="['/all-products']">
+                    <span class="text">Back</span> <i class="fas fa-arrow-circle-left"></i>
+                  </button>
+                </div>
+              </div>
+            </article>
+          </main>
+        </div>
+      </div>
+    </div>
+  </section>
+  

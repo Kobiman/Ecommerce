@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Ecommerce.DAL": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
