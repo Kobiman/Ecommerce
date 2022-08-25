@@ -21,6 +21,9 @@ import { AllProductsComponent } from './allProducts/allProducts';
 import { ViewProductComponent } from './viewProduct/viewproduct';
 import {addInventoryComponent} from './addinventory/addinventory';
 import {listinventoryComponent} from './listinventory/listinventory'
+import { CustomerProductViewComponent } from './customerProductView/customerProductView';
+import { NotifyCartService } from './sevices/notifyCartService';
+import { CheckoutComponent } from './check-out/checkoutComponent';
 
 @NgModule({
   declarations: [
@@ -31,13 +34,15 @@ import {listinventoryComponent} from './listinventory/listinventory'
     FetchDataComponent,
     HeadNavComponent,
     PopularProductsComponent,
+    CustomerProductViewComponent,
     AddProductComponent,
     ToastMessageComponent,
     AllProductsComponent,
     ViewProductComponent,
     FootNavComponent,
     addInventoryComponent,
-    listinventoryComponent
+    listinventoryComponent,
+    CheckoutComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -53,10 +58,13 @@ import {listinventoryComponent} from './listinventory/listinventory'
       { path: 'all-products', component: AllProductsComponent },
       { path: 'view-product/:id', component: ViewProductComponent },
       { path: 'add-new-inventory', component: addInventoryComponent },
-      { path: 'all-inventory', component: listinventoryComponent }
+      { path: 'product-details', component: CustomerProductViewComponent },
+      { path: 'product-details/:id', component: CustomerProductViewComponent },
+      { path: 'all-inventory', component: listinventoryComponent },
+      { path: 'shopping-cart', component: CheckoutComponent }
     ])
   ],
-  providers: [EcommerceHttpService, ToastService],
+  providers: [EcommerceHttpService, ToastService, NotifyCartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

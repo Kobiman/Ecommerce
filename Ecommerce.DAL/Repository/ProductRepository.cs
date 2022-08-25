@@ -45,8 +45,7 @@ namespace Ecommerce.DAL.Repository
         public IEnumerable<GetProductsDto> GetProducts()
         {
             return Collection
-                  .Select(x => x.Map<GetProductsDto, Product>())
-                  .ToList();
+                  .Select(x => x.Map<GetProductsDto, Product>());
         }
 
         public IEnumerable<GetProductsDto> GetProducts(int skip, int take)
@@ -54,27 +53,24 @@ namespace Ecommerce.DAL.Repository
             return Collection
                   .Skip(skip)
                   .Take(take)
-                  .Select(x => x.Map<GetProductsDto, Product>())
-                  .ToList();
+                  .Select(x => x.Map<GetProductsDto, Product>());
         }
 
         public IEnumerable<GetProductsDto> GetProductsByBrand(string brand)
         {
             return Collection.Where(x=> x.Brand == brand)
-                   .Select(x => x.Map<GetProductsDto, Product>())
-                   .ToList();
+                   .Select(x => x.Map<GetProductsDto, Product>());
         }
 
         public IEnumerable<Product> GetProductsByCategory(string category)
         {
-            return Collection.Where(x => x.Category == category).ToList();
+            return Collection.Where(x => x.Category == category);
         }
 
         public IEnumerable<GetInventoryResponse> GetProductsInventory()
         {
             return Collection
-                 .Select(x => x.Map<GetInventoryResponse, Product>())
-                 .ToList();
+                 .Select(x => x.Map<GetInventoryResponse, Product>());
         }
 
         public IEnumerable<GetInventoryResponse> GetInventory(int skip, int take)
@@ -82,8 +78,7 @@ namespace Ecommerce.DAL.Repository
             return Collection
                  .Skip(skip)
                  .Take(take)
-                 .Select(x => x.Map<GetInventoryResponse, Product>())
-                 .ToList();
+                 .Select(x => x.Map<GetInventoryResponse, Product>());
         }
 
         public bool UpdateProduct(UpdateProductDto product)
