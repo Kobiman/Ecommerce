@@ -50,7 +50,7 @@
                 </td>
                 <td class="text-right">
                   <!--<a data-original-title="Save to Wishlist" title="" href="" class="btn btn-light" data-toggle="tooltip"> <i class="fa fa-heart"></i></a>-->
-                  <a href="" class="btn btn-light"> Remove</a>
+                  <a class="btn btn-light" (click)="removeProduct(product)"> Remove</a>
                 </td>
               </tr>
             </tbody>
@@ -58,7 +58,7 @@
 
           <div class="card-body border-top">
             <a href="#" class="btn btn-primary float-md-right"> Submit  </a><!--<i class="fa fa-chevron-right"></i>-->
-            <a href="#" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
+            <a [routerLink]="['/']" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Continue shopping </a>
           </div>
         </div> <!-- card.// -->
 

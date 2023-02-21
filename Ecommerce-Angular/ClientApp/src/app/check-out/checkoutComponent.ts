@@ -20,5 +20,10 @@ export class CheckoutComponent {
     this.cartItems = notifyCartService.getItems();
     this.totalPrice = this.cartItems.map(x => x.totalPrice).reduce((a, b) => a + b, 0);
   }
+
+  removeProduct(product) {
+    var index = this.cartItems.indexOf(product);
+    this.cartItems.splice(index, 1);
+  }
   
 }

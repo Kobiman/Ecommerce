@@ -29,4 +29,9 @@ export class NotifyCartService {
   getItems() {
     return this.items;
   }
+
+  //removeItem(item) {
+  //  var index = this.items.indexOf(item);
+  //  this.items.splice(index, 1);
+  //}
 }
