@@ -4,10 +4,10 @@ import { EcommerceHttpService } from "../sevices/EcommerceHttpService";
 import { NotifyCartService } from "../sevices/notifyCartService";
 
 @Component({
-  selector: 'checkout',
-  templateUrl: './checkoutComponent.html',
+  selector: 'shoppingCart',
+  templateUrl: './shoppingCartComponent.html',
 })
-export class CheckoutComponent {
+export class ShoppingCartComponent {
   product: any = {};
   baseUrl: string;
   cartItems: any[] = [];

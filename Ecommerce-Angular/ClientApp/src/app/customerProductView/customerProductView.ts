@@ -36,7 +36,16 @@ export class CustomerProductViewComponent {
   }
 
   addToCart(product) {
-    var p = { id: product.productId, name: product.name, image: product.image, quantity: product.quantity, unitPrice: product.price, totalPrice: product.price * product.quantity };
+    var p = {
+      id: product.productId,
+      name: product.name,
+      image: product.image,
+      quantity: product.quantity,
+      unitPrice: product.price,
+      totalPrice: product.price * product.quantity,
+      brand: product.brand,
+      description: product.description
+    };
     if (p.quantity === 0 || isNaN(p.quantity)) {
       p.quantity = 1;
     }

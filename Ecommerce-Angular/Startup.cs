@@ -47,6 +47,7 @@ namespace Ecommerce_Angular
             services.AddScoped<IProductTransactionService, ProductTransactionService>();
             services.AddScoped<IUserService, UserService>(); 
             services.AddTransient<IEmailSender, EmailSender>();
+            services.AddTransient<ICheckoutService, CheckoutService>();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
