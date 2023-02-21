@@ -23,7 +23,9 @@ import {addInventoryComponent} from './addinventory/addinventory';
 import {listinventoryComponent} from './listinventory/listinventory'
 import { CustomerProductViewComponent } from './customerProductView/customerProductView';
 import { NotifyCartService } from './sevices/notifyCartService';
-import { CheckoutComponent } from './check-out/checkoutComponent';
+import { ShoppingCartComponent } from './check-out/shoppingCart';
+import { CheckoutComponent } from './check-out/checkout';
+
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { CheckoutComponent } from './check-out/checkoutComponent';
     FootNavComponent,
     addInventoryComponent,
     listinventoryComponent,
+    ShoppingCartComponent,
     CheckoutComponent,
   ],
   imports: [
@@ -61,7 +64,8 @@ import { CheckoutComponent } from './check-out/checkoutComponent';
       { path: 'product-details', component: CustomerProductViewComponent },
       { path: 'product-details/:id', component: CustomerProductViewComponent },
       { path: 'all-inventory', component: listinventoryComponent },
-      { path: 'shopping-cart', component: CheckoutComponent }
+      { path: 'shopping-cart', component: ShoppingCartComponent },
+      { path: 'checkout', component: CheckoutComponent }
     ])
   ],
   providers: [EcommerceHttpService, ToastService, NotifyCartService],
