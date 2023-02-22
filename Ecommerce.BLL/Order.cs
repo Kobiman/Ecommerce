@@ -7,19 +7,20 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Models
 {
-    public class Checkout
+    public class Order
     {
-        public Checkout() { 
-          CheckoutItemId = Guid.NewGuid().ToString();
-          CheckoutItems = new List<CartItem>();
+        public Order() { 
+          CheckoutId = Guid.NewGuid().ToString();
+          CheckoutItems = new List<OrderItem>();
         }
-        public string CheckoutItemId { get; set; }
+        public string CheckoutId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Contact { get; set; }
         public string Email { get; set; }
         public string Location { get; set; }
-        public IList<CartItem> CheckoutItems { get; set; }
+        public string Status { get; set; }
+        public IList<OrderItem> CheckoutItems { get; set; }
 
     }
 }

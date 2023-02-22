@@ -25,6 +25,7 @@ import { CustomerProductViewComponent } from './customerProductView/customerProd
 import { NotifyCartService } from './sevices/notifyCartService';
 import { ShoppingCartComponent } from './check-out/shoppingCart';
 import { CheckoutComponent } from './check-out/checkout';
+import { CheckoutItemstComponent } from './check-out/checkoutItemsComponent';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { CheckoutComponent } from './check-out/checkout';
     listinventoryComponent,
     ShoppingCartComponent,
     CheckoutComponent,
+    CheckoutItemstComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -65,7 +67,8 @@ import { CheckoutComponent } from './check-out/checkout';
       { path: 'product-details/:id', component: CustomerProductViewComponent },
       { path: 'all-inventory', component: listinventoryComponent },
       { path: 'shopping-cart', component: ShoppingCartComponent },
-      { path: 'checkout', component: CheckoutComponent }
+      { path: 'checkout', component: CheckoutComponent }, 
+      { path: 'checkoutItems', component: CheckoutItemstComponent }
     ])
   ],
   providers: [EcommerceHttpService, ToastService, NotifyCartService],

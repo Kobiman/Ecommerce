@@ -8,27 +8,29 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.DAL.Repository
 {
-    public class CheckoutRepository : Repository<Checkout>, ICheckoutRepository
+    public class CheckoutRepository : Repository<Order>, ICheckoutRepository
     {
-        public CheckoutRepository(IList<Checkout> collection) : base(collection)
+        public CheckoutRepository(IList<Order> collection) : base(collection)
         {
         }
 
-        public Checkout GetCheckoutById(string id)
+        public Order GetCheckoutById(string id)
         {
             return Collection.FirstOrDefault(x => x.CheckoutId == id);
         }
 
-        public bool SaveCheckout(Checkout checkout)
+        public bool SaveCheckout(Order checkout)
         {
             Collection.Add(checkout);
-            new DataWriter().WriterData(checkout, nameof(Checkout));
+            new DataWriter().WriterData(checkout, nameof(Order));
             return true;
         }
 
-        public bool UpdateCheckoutStatus(string id)
+        public bool UpdateCheckoutStatus(Order checkout)
         {
-            throw new NotImplementedException();
+            Collection.Add(checkout);
+            new DataWriter().WriterData(checkout, nameof(Order));
+            return true;
         }
     }
 }

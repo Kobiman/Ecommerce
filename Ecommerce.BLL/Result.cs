@@ -17,6 +17,10 @@ namespace Ecommerce.Models
         public T Value { get; set; }
         public string Message { get; set; }
 
+        public Result()
+        {
+
+        }
         public Result(bool isSuccessful, T value, string message)
         {
             IsSucessful = isSuccessful;
@@ -27,8 +31,13 @@ namespace Ecommerce.Models
     
     public class Result : IResult
     {
-        public bool IsSucessful { get; private set; }
-        public string Message { get; private set; }
+        public bool IsSucessful { get; set; }
+        public string Message { get; set; }
+
+        public Result()
+        {
+
+        }
 
         public Result(bool isSuccessful, string message)
         {

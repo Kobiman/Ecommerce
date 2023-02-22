@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Models
 {
-    public class CartItem
+    public class OrderItem
     {
         public string Id { get; set; }
 

@@ -43,6 +43,7 @@
 
   <ItemGroup>
     <None Remove="ClientApp\src\app\check-out\checkout.ts" />
+    <None Remove="ClientApp\src\app\check-out\checkoutItemsComponent.ts" />
     <None Remove="ClientApp\src\app\check-out\shoppingCart.ts" />
   </ItemGroup>
 

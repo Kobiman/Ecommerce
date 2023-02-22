@@ -15,6 +15,7 @@ namespace Ecommerce.DAL
 {
     public class DataSource : IDataSource
     {
+        private ICheckoutRepository _checkout;
         private IProductRepository _products;
         private IProductTransactionRepository _producttransactions;
 
@@ -23,6 +24,25 @@ namespace Ecommerce.DAL
 
         public IProductTransactionRepository ProductTransactions => _producttransactions ??
             (_producttransactions = new ProductTransactionRepository(LoadProductTransactions()));
+
+        public ICheckoutRepository Checkout => _checkout ??
+                (_checkout = new CheckoutRepository(LoadCheckout()));
+
+        private IList<Order> LoadCheckout()
+        {
+            var checkout =
+                 DataReader
+                .ReadData<Order>(nameof(Checkout))
+                .GroupBy(x => new { x.CheckoutId });
+            var uniqueCheckout = new List<Order>();
+            foreach(var c in checkout)
+            {
+                var product = c.Last();
+                uniqueCheckout.Add(product);
+            }
+
+            return uniqueCheckout;
+        }
 
         private IList<Product> LoadProducts()
         {

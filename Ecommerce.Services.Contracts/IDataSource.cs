@@ -7,6 +7,7 @@ namespace Ecommerce.Services.Interfaces
 {
     public interface IDataSource
     {
+        ICheckoutRepository Checkout { get; }
         IProductRepository Products { get; }
         IProductTransactionRepository ProductTransactions { get; }
     }

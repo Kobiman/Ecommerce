@@ -1,0 +1,71 @@
+﻿@page "/"
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-main bg padding-y">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-9">
+                <article class="banner-wrap">
+                    <img src="assets/images/banners/11.jpg" class="img-fluid rounded">
+                </article>
+            </div> <!-- col.// -->
+        </div> <!-- row.// -->
+    </div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+    <div class="container">
+
+        <header class="section-heading">
+            <!--<a href="#" class="btn btn-outline-primary float-right">See all</a>-->
+            <h3 class="section-title">Products</h3>
+        </header>
+
+
+        <div class="row">
+            @foreach (var product in products)
+            {
+                <div class="col-md-3">
+                    <div class="card card-product-grid">
+                        <a class="img-wrap"> <img src="@product.Image"> </a>
+                        <figcaption class="info-wrap">
+                            <div class="fix-height">
+                                <a class="title">@product.Name</a>
+                                <div class="price-wrap mt-2">
+                                    <span class="price">GHS @product.Price</span>
+                                </div>
+                            </div>
+                            <a href="product-details/@product.ProductId" class="btn btn-block btn-primary">Add to cart </a>
+                        </figcaption>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+@code {
+    IEnumerable<GetProductsDto> products = new List<GetProductsDto>();
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<Result<GetProductsDto[]>>("api/Product/GetProducts");
+        if (result is not null && result.IsSucessful)
+        {
+            products = result.Value;
+           // await InvokeAsync(StateHasChanged);
+        }
+        else
+        {
+            products = new List<GetProductsDto>();
+        }
+    }
+}
+
+@*
+<PageTitle>Index</PageTitle>
+
+<h1>Hello, world!</h1>
+
+Welcome to your new app.
+
+<SurveyPrompt Title="How is Blazor working for you?" />*@

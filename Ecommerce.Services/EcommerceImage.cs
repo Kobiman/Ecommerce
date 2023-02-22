@@ -11,7 +11,7 @@ namespace Ecommerce.Services
         public string SaveImage(string bitImage)
         {
            var imgData = bitImage?.Split(',');
-            if (imgData == null || imgData.Length <= 1) return null;
+            if (imgData == null || imgData.Length <= 1) return bitImage;
            var fileExtension = imgData[0].Split('/')[1].Split(';')[0];
            byte[] bytes = Convert.FromBase64String(imgData[1]);
            var relativePath = $"Products/{Guid.NewGuid()}.{fileExtension}";

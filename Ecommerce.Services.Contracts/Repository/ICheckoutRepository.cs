@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Services.Interfaces.Repository
 {
-    public interface ICheckoutRepository : IRepository<Checkout>
+    public interface ICheckoutRepository : IRepository<Order>
     {
-        Checkout GetCheckoutById(string id);
+        Order GetCheckoutById(string id);
 
-        bool SaveCheckout(Checkout checkout);
+        bool SaveCheckout(Order checkout);
 
-        bool UpdateCheckoutStatus(string id);
+        bool UpdateCheckoutStatus(Order checkout);
 
     }
 }

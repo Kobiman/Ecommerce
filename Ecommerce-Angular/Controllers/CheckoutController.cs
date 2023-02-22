@@ -24,5 +24,14 @@ namespace Ecommerce_Angular.Controllers
             _checkoutService.SaveCheckoutItem(checkoutItemVm);
            return Ok("OK");
         }
+
+        [HttpGet]
+        [Route("GetCheckoutItems")]
+        public IActionResult GetCheckoutItems()
+        {
+            var result = _checkoutService.GetCheckoutItems();
+            if (result.IsSucessful) return Ok(result);
+            return BadRequest();
+        }
     }
 }
