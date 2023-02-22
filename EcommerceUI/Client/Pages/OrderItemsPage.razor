@@ -12,7 +12,24 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <h6 class="text-muted">Delivery to</h6>
+                                    <div class="row">
+                                    <h6 class="text-muted">Order Staus:</h6>
+                                    <label class="custom-control custom-checkbox">
+				                      <input type="checkbox" checked="" class="custom-control-input">
+				                      <div class="custom-control-label">Order Confirmed</div>
+				                    </label>
+				                    <label class="custom-control custom-checkbox">
+				                      <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label">Order Delivered</div>
+				                    </label>
+				                    <label class="custom-control custom-checkbox">
+				                      <input type="checkbox" checked="" class="custom-control-input">
+                                        <div class="custom-control-label">Order Rejected</div>
+				                    </label>
+                                    </div>
+                                    <p>
+                                        <h6 class="text-muted">Delivery Details:</h6>
+                                    </p>
                                     <p>
                                         @o.FirstName @o.LastName <br>
                                         Phone @o.Contact Email: @o.Email <br>
@@ -47,7 +64,13 @@
                                         <var class="price text-muted">GHS @item.TotalPrice</var>
                                     </td>
                                     <td> Brand <br> @item.Brand </td>
-                                    <td width="250"> <a href="#" class="btn btn-outline-primary">Track order</a> <a href="#" class="btn btn-light"> Details </a> </td>
+                                    <td width="250">
+                                        <InputSelect name="order_staus" id="inputState" class="form-control" @bind-Value="item.Name">
+                                            <option selected="order_confirmed" value="order_confirmed">Order Confirmed</option>
+                                            <option value="order_delivered">Order Delivered</option>
+                                            <option value="order_rejected">Order Rejected</option>
+                                        </InputSelect> <a href="#" class="btn btn-light"> Update </a>
+                                    </td>
                                 </tr>
                               }
                             </table>
