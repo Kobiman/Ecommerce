@@ -13,19 +13,27 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <div class="row">
+                                    <div class="col-md-3">
                                     <h6 class="text-muted">Order Staus:</h6>
-                                    <label class="custom-control custom-checkbox">
-				                      <input type="checkbox" checked="" class="custom-control-input">
-				                      <div class="custom-control-label">Order Confirmed</div>
-				                    </label>
-				                    <label class="custom-control custom-checkbox">
-				                      <input type="checkbox" checked="" class="custom-control-input">
-                                        <div class="custom-control-label">Order Delivered</div>
-				                    </label>
-				                    <label class="custom-control custom-checkbox">
-				                      <input type="checkbox" checked="" class="custom-control-input">
-                                        <div class="custom-control-label">Order Rejected</div>
-				                    </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                            <label class="custom-control custom-radio custom-control-inline">
+                                                <input class="custom-control-input" checked="" type="radio" name="@o.CheckoutId" value="option1">
+                                                <span class="custom-control-label"> Order Received </span>
+                                            </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                            <label class="custom-control custom-radio custom-control-inline">
+                                                <input class="custom-control-input" type="radio" name="@o.CheckoutId" value="option2">
+                                                <span class="custom-control-label"> Order Delivered </span>
+                                            </label>
+                                    </div>
+                                    <div class="col-md-3">
+                                            <label class="custom-control custom-radio custom-control-inline">
+                                                <input class="custom-control-input" type="radio" name="@o.CheckoutId" value="option3">
+                                                <span class="custom-control-label"> Order Rejected </span>
+                                            </label>
+                                    </div>
                                     </div>
                                     <p>
                                         <h6 class="text-muted">Delivery Details:</h6>
@@ -65,11 +73,7 @@
                                     </td>
                                     <td> Brand <br> @item.Brand </td>
                                     <td width="250">
-                                        <InputSelect name="order_staus" id="inputState" class="form-control" @bind-Value="item.Name">
-                                            <option selected="order_confirmed" value="order_confirmed">Order Confirmed</option>
-                                            <option value="order_delivered">Order Delivered</option>
-                                            <option value="order_rejected">Order Rejected</option>
-                                        </InputSelect> <a href="#" class="btn btn-light"> Update </a>
+                                            <label class="custom-control custom-checkbox"> <input type="checkbox" class="custom-control-input"> <div class="custom-control-label"> Rejected </div> </label>
                                     </td>
                                 </tr>
                               }
