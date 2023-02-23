@@ -33,11 +33,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ecommerce.Tests", "Ecommerc
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Blazor", "Blazor", "{C2EED6C7-AEDF-451C-9328-F317D56CA5B8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceUI.Server", "EcommerceUI\Server\EcommerceUI.Server.csproj", "{4A27DD1A-367C-441A-9609-2AD74649BF71}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceUI.Server", "EcommerceUI\Server\EcommerceUI.Server.csproj", "{4A27DD1A-367C-441A-9609-2AD74649BF71}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceUI.Client", "EcommerceUI\Client\EcommerceUI.Client.csproj", "{7E061586-395A-4F54-BF8D-42F6FA46BDC8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceUI.Client", "EcommerceUI\Client\EcommerceUI.Client.csproj", "{7E061586-395A-4F54-BF8D-42F6FA46BDC8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EcommerceUI.Shared", "EcommerceUI\Shared\EcommerceUI.Shared.csproj", "{FDA1A46B-AC65-4C40-B384-4672712CDD41}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EcommerceUI.Shared", "EcommerceUI\Shared\EcommerceUI.Shared.csproj", "{FDA1A46B-AC65-4C40-B384-4672712CDD41}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -82,7 +82,7 @@
                               </div>
                             </div>-->
                         </div>
-                        <button class="btn  btn-primary"> Buy now </button>
+                        <button @onclick="BuyNow" class="btn  btn-primary"> Buy now </button>
                         <button @onclick="AddToCart" class="btn  btn-outline-primary"> <span class="text">Add to cart</span> <i class="fas fa-shopping-cart"></i>  </button>
                     </article>
                 </main>
@@ -97,11 +97,13 @@
     [Parameter]
     public string? ProductId { get; set; }
 
-    public int Quantity { get; set; }
+    public int Quantity { get; set; } = 1;
 
     public void AddToCart()
     {
-        var cartItem = new Services.CartItem(
+        if(Quantity > 0)
+        {
+            var cartItem = new Services.CartItem(
                   product.ProductId,
                   product.Name,
                   product.Image,
@@ -111,9 +113,32 @@
                   product.Brand,
                   product.Description
                 );
-        cartService.AddToCart(cartItem);
-        Quantity = 0;
-        product = new GetProductDto();
+            cartService.AddToCart(cartItem);
+            Quantity = 0;
+            product = new GetProductDto();
+            navigation.NavigateTo("/");
+        }
+    }
+
+    public void BuyNow()
+    {
+        if (Quantity > 0)
+        {
+            var cartItem = new Services.CartItem(
+                  product.ProductId,
+                  product.Name,
+                  product.Image,
+                  Quantity,
+                  product.Price,
+                  product.Price * Quantity,
+                  product.Brand,
+                  product.Description
+                );
+            cartService.AddToCart(cartItem);
+            Quantity = 0;
+            product = new GetProductDto();
+            navigation.NavigateTo("shopping-cart");
+        }
     }
 
     protected override async Task OnInitializedAsync()
