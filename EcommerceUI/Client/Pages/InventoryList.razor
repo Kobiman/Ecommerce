@@ -36,8 +36,8 @@
                                         </td>
                                         <td>
                                             <div class="price-wrap">
-                                                <var class="price">GHS @i.TotalAmount</var>
-                                                <small class="text-muted"> GHS @i.Price each </small>
+                                                <var class="price">GHS @String.Format("{0:0,0.0}",i.TotalAmount)</var>
+                                                <small class="text-muted"> GHS @String.Format("{0:0,0.0}",i.Price) each </small>
                                             </div> <!-- price-wrap .// -->
                                         </td>
                                     </tr>

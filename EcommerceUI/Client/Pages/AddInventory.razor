@@ -1,0 +1,131 @@
+﻿@page "/add-new-inventory"
+<section class="section-content padding-y bg">
+    <div class="container">
+        <div class="card">
+            <div class="row no-gutters">
+                <aside class="col-md-6">
+                    <article class="gallery-wrap">
+                        <div class="img-big-wrap">
+                            <a><img src="@product.Image"></a>
+                        </div>
+
+                    </article>
+                </aside>
+                <main class="col-md-6 border-left">
+                    <article class="content-body">
+                        <h4 class="card-title mb-4">Add New Inventory</h4>
+                        <EditForm Model="@productTransaction" OnValidSubmit="@HandleValidSubmit">
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label>Product</label>
+                                    <select name="productId" class="form-control"  @onchange="(e)=>SetProduct(e.Value.ToString())">
+                                        <option value=""></option>
+                                        @foreach(var p in products)
+                                        {
+                                            <option value="@p.ProductId">@p.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="col form-group">
+                                    <label>Category</label>
+                                    <InputText name="category" type="text" class="form-control" placeholder="" @bind-Value="product.Category" readonly="true"/>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label>Price</label>
+                                    <InputNumber name="price" type="number" class="form-control" placeholder="" @bind-Value="product.Price" readonly="true" />
+                                </div>
+                                <div class="col form-group">
+                                    <label>Brand</label>
+                                    <InputText name="brand" type="text" class="form-control" placeholder="" @bind-Value="product.Brand" readonly="true" />
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Description</label>
+                                <InputTextArea name="description" type="text" class="form-control" placeholder="" @bind-Value="product.Description"
+                                          rows="2" readonly="true"/>
+                            </div>
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label>Stock</label>
+                                    <input type="number" name="quantity" class="form-control" placeholder="" @onchange="e=>CalculateTotalPrice(e.Value.ToString())" />
+                                </div>
+                                <div class="col form-group">
+                                    <label>Total Amount</label>
+                                    <InputNumber name="totalAmount" class="form-control" placeholder="" @bind-Value="productTransaction.TotalAmount" readonly="true" />
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="form-row">
+                                <div class="col-md-3">
+                                    <button class="btn btn-primary">
+                                        <span class="text">Save</span> <i class="fas fa-save"></i>
+                                    </button>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <a class="btn  btn-outline-primary" href="['/all-products']">
+                                        <span class="text">Back</span> <i class="fas fa-arrow-circle-left"></i>
+                                    </a>
+                                </div>
+                            </div>
+
+                        </EditForm>
+                    </article>
+                </main>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+@code {
+
+    AddProductTransactionDto productTransaction = new AddProductTransactionDto();
+    IList<GetInventoryResponse> products = new List<GetInventoryResponse>();
+    GetInventoryResponse product = new GetInventoryResponse();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var result = await Http.GetFromJsonAsync<Result<GetInventoryResponse[]>>($"api/Product/GetProducts");
+        if (result is not null && result.IsSucessful)
+        {
+            products = result.Value;
+        }
+    }
+
+    private void SetProduct(string p)
+    {
+        product = products.FirstOrDefault(x=>x.ProductId == p);
+        productTransaction.ProductId = product.ProductId;
+        productTransaction.UnitPrice = product.Price;
+    }
+
+    private void CalculateTotalPrice(string quantity)
+    {
+        productTransaction.Quantity = int.Parse(quantity);
+        productTransaction.TotalAmount = productTransaction.UnitPrice * productTransaction.Quantity;
+        StateHasChanged();
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        var response = await Http.PostAsJsonAsync("api/ProductTransaction/AddProductTransaction", productTransaction);
+        var content = await response.Content.ReadFromJsonAsync<Result>();
+        if (content is not null && content.IsSucessful)
+        {
+            productTransaction = new AddProductTransactionDto();
+            product = new GetInventoryResponse();
+            //Snackbar.Add(content.Message, Severity.Success);
+            //accountEvents.OnAccountAdded(this);
+        }
+        else if (content is not null && !content.IsSucessful)
+        {
+            //Snackbar.Add(content.Message, Severity.Success);
+        }
+        StateHasChanged();
+    }
+}

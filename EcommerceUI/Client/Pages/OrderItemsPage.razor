@@ -52,9 +52,9 @@
                                         Visa  **** 4216
                                     </span>
                                     <p>
-                                        Subtotal: GHS @o.CheckoutItems.Sum(x=>x.TotalPrice) <br>
+                                        Subtotal: GHS @String.Format("{0:0,0.0}",o.CheckoutItems.Sum(x=>x.TotalPrice)) <br>
                                         Shipping fee:  GHS 0 <br>
-                                        <span class="b">Total:  GHS @o.CheckoutItems.Sum(x=>x.TotalPrice) </span>
+                                        <span class="b">Total:  GHS @String.Format("{0:0,0.0}",o.CheckoutItems.Sum(x=>x.TotalPrice)) </span>
                                     </p>
                                 </div>
                             </div> <!-- row.// -->
@@ -69,7 +69,7 @@
                                     </td>
                                     <td>
                                         <p class="title mb-0">@item.Name </p>
-                                        <var class="price text-muted">GHS @item.TotalPrice</var>
+                                        <var class="price text-muted">GHS @String.Format("{0:0,0.0}",item.TotalPrice)</var>
                                     </td>
                                     <td> Brand <br> @item.Brand </td>
                                     <td width="250">

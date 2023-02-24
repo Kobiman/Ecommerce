@@ -33,7 +33,7 @@
                             <div class="fix-height">
                                 <a class="title">@product.Name</a>
                                 <div class="price-wrap mt-2">
-                                    <span class="price">GHS @product.Price</span>
+                                    <span class="price">GHS @String.Format("{0:0,0.0}",product.Price)</span>
                                 </div>
                             </div>
                             <a href="product-details/@product.ProductId" class="btn btn-block btn-primary">Add to cart </a>

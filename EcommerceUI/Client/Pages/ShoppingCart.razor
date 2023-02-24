@@ -48,8 +48,8 @@
                                 </td>
                                 <td>
                                     <div class="price-wrap">
-                                        <var class="price">GHS @item.TotalPrice</var>
-                                        <small class="text-muted"> GHS @item.UnitPrice each </small>
+                                        <var class="price">GHS @String.Format("{0:0,0.0}",item.TotalPrice)</var>
+                                        <small class="text-muted"> GHS @String.Format("{0:0,0.0}",item.UnitPrice) each </small>
                                     </div> <!-- price-wrap .// -->
                                 </td>
                                 <td class="text-right">
@@ -92,7 +92,7 @@
                     <div class="card-body">
                         <dl class="dlist-align">
                             <dt>Total price:</dt>
-                            <dd class="text-right">GHS @totalPrice</dd>
+                            <dd class="text-right">GHS @String.Format("{0:0,0.0}",totalPrice)</dd>
                         </dl>
                         <dl class="dlist-align">
                             <dt>Discount:</dt>
@@ -100,7 +100,7 @@
                         </dl>
                         <dl class="dlist-align">
                             <dt>Total:</dt>
-                            <dd class="text-right  h5"><strong>GHS @totalPrice</strong></dd>
+                            <dd class="text-right  h5"><strong>GHS @String.Format("{0:0,0.0}",totalPrice)</strong></dd>
                         </dl>
                         <hr>
                         <!--<p class="text-center mb-3">
