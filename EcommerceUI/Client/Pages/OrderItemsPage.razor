@@ -1,6 +1,9 @@
 ﻿@page "/orders"
-@foreach (var o in orders){
-    <section class="section-content padding-y bg">
+@using EcommerceUI.Client.ViewModels;
+@using KMapper;
+<div style="height:75vh;overflow-y:scroll">
+  <Virtualize Context="o" Items="@orders" OverscanCount="4">
+  <section class="section-content padding-y bg">
         <div class="container">
             <div class="row">
                 <main class="col-md-12">
@@ -8,6 +11,18 @@
                         <header class="card-header">
                             <strong class="d-inline-block mr-3">Order ID: @o.CheckoutId</strong>
                             <span>Order Date: 16 December 2018</span>
+                            @if (o.EnableButton)
+                            {
+                                <button class="btn btn-primary fa-pull-right" @onclick="@(()=>HandleValidSubmit(o))">
+                                  <span class="text">Submit</span> <i class="fas fa-save"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-primary fa-pull-right" disabled>
+                                    <span class="text">Submit</span> <i class="fas fa-save"></i>
+                                </button>
+                            }
                         </header>
                         <div class="card-body">
                             <div class="row">
@@ -17,22 +32,22 @@
                                     <h6 class="text-muted">Order Staus:</h6>
                                     </div>
                                     <div class="col-md-3">
-                                            <label class="custom-control custom-radio custom-control-inline">
-                                                <input class="custom-control-input" checked="" type="radio" name="@o.CheckoutId" value="option1">
-                                                <span class="custom-control-label"> Order Received </span>
-                                            </label>
+                                          <label class="custom-control custom-radio custom-control-inline">
+                                              <input class="custom-control-input" checked="" type="radio" name="@o.CheckoutId" value="OrderReceived" @onchange="@((e)=>SetStatus(e.Value.ToString(),o))">
+                                              <span class="custom-control-label"> Order Received </span>
+                                          </label>
                                     </div>
                                     <div class="col-md-3">
-                                            <label class="custom-control custom-radio custom-control-inline">
-                                                <input class="custom-control-input" type="radio" name="@o.CheckoutId" value="option2">
-                                                <span class="custom-control-label"> Order Delivered </span>
-                                            </label>
+                                          <label class="custom-control custom-radio custom-control-inline">
+                                                    <input class="custom-control-input" type="radio" name="@o.CheckoutId" value="OrderDelivered" @onchange="@((e)=>SetStatus(e.Value.ToString(),o))">
+                                              <span class="custom-control-label"> Order Delivered </span>
+                                          </label>
                                     </div>
                                     <div class="col-md-3">
-                                            <label class="custom-control custom-radio custom-control-inline">
-                                                <input class="custom-control-input" type="radio" name="@o.CheckoutId" value="option3">
-                                                <span class="custom-control-label"> Order Rejected </span>
-                                            </label>
+                                          <label class="custom-control custom-radio custom-control-inline">
+                                                    <input class="custom-control-input" type="radio" name="@o.CheckoutId" value="OrderRejected" @onchange="@((e)=>SetStatus(e.Value.ToString(),o))">
+                                              <span class="custom-control-label"> Order Rejected </span>
+                                          </label>
                                     </div>
                                     </div>
                                     <p>
@@ -52,16 +67,16 @@
                                         Visa  **** 4216
                                     </span>
                                     <p>
-                                        Subtotal: GHS @String.Format("{0:0,0.0}",o.CheckoutItems.Sum(x=>x.TotalPrice)) <br>
+                                        Subtotal: GHS @String.Format("{0:0,0.0}",o.OrderItems.Sum(x=>x.TotalPrice)) <br>
                                         Shipping fee:  GHS 0 <br>
-                                        <span class="b">Total:  GHS @String.Format("{0:0,0.0}",o.CheckoutItems.Sum(x=>x.TotalPrice)) </span>
+                                        <span class="b">Total:  GHS @String.Format("{0:0,0.0}",o.OrderItems.Sum(x=>x.TotalPrice)) </span>
                                     </p>
                                 </div>
                             </div> <!-- row.// -->
                         </div> <!-- card-body .// -->
                         <div class="table-responsive">
                             <table class="table table-hover">
-                              @foreach(var item in o.CheckoutItems)
+                              @foreach(var item in o.OrderItems)
                               {
                                 <tr >
                                     <td width="65">
@@ -84,16 +99,50 @@
             </div>
         </div>
     </section>
-}
+ </Virtualize>
+</div>
 
 @code {
-    IList<Order> orders = new List<Order>();
+    IList<OrderVm> orders = new List<OrderVm>();
     protected override async Task OnInitializedAsync()
     {
-        var result = await Http.GetFromJsonAsync<Result<Order[]>>($"api/Checkout/GetCheckoutItems");
+        var result = await Http.GetFromJsonAsync<Result<IList<OrderVm>>>($"api/Checkout/GetCheckoutItems");
         if (result is not null && result.IsSucessful)
         {
             orders = result.Value;
         }
+    }
+
+    void SetStatus(string value, OrderVm o)
+    {
+        if(value == "OrderReceived")
+        {
+            o.EnableButton = false;
+            o.Status = value;
+        }
+        else
+        {
+            o.EnableButton = true;
+            o.Status = value;
+        }
+    }
+
+    private async Task HandleValidSubmit(OrderVm o)
+    {
+        var model = o.Map<UpdateCheckoutItemDto, OrderVm>();
+        model.CartItems = o.OrderItems.Select(x => x.Map<CartItemDto, OrderItem>()).ToList();
+        var response = await Http.PostAsJsonAsync("api/Checkout/UpdateCheckoutItem", model);
+        var content = await response.Content.ReadFromJsonAsync<Result>();
+        if (content is not null && content.IsSucessful)
+        {
+            orders.Remove(o);
+            //Snackbar.Add(content.Message, Severity.Success);
+            //accountEvents.OnAccountAdded(this);
+        }
+        else if (content is not null && !content.IsSucessful)
+        {
+            //Snackbar.Add(content.Message, Severity.Success);
+        }
+        StateHasChanged();
     }
 }

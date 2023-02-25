@@ -7,8 +7,10 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Models.Dto
 {
-    public class AddCheckoutItemDto
+    public class UpdateCheckoutItemDto
     {
+        [Required]
+        public string CheckoutId { get; set; }
         [Required]
         public string FirstName { get; set; }
         [Required]
@@ -21,17 +23,7 @@ namespace Ecommerce.Models.Dto
         public string Email { get; set; }
         [Required]
         public string Location { get; set; }
+        public string Status { get; set; }
         public IList<CartItemDto> CartItems { get; set; }
-    }
-    public class CartItemDto
-    {
-        public string ProductId { get; set; }
-        public string Name { get; set; }
-        public string Image { get; set; }
-        public int Quantity { get; set; }
-        public double UnitPrice { get; set; }
-        public double TotalPrice { get; set; }
-        public string Brand { get; set; }
-        public string Description { get; set; }
     }
 }

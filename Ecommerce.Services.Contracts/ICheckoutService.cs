@@ -12,6 +12,6 @@ namespace Ecommerce.Services.Interfaces
     {
         IResult SaveCheckoutItem(AddCheckoutItemDto checkoutItemVm);
         IResult GetCheckoutItems();
-        IResult UpdateCheckoutItem(string status);
+        IResult UpdateCheckoutItem(UpdateCheckoutItemDto checkoutItemVm);
     }
 }

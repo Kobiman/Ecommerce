@@ -32,7 +32,7 @@ namespace Ecommerce.DAL
         {
             var checkout =
                  DataReader
-                .ReadData<Order>(nameof(Checkout))
+                .ReadData<Order>(nameof(Order))
                 .GroupBy(x => new { x.CheckoutId });
             var uniqueCheckout = new List<Order>();
             foreach(var c in checkout)

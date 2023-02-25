@@ -25,6 +25,15 @@ namespace EcommerceUI.Server.Controllers
             return BadRequest();
         }
 
+        [HttpPost]
+        [Route("UpdateCheckoutItem")]
+        public IActionResult UpdateCheckoutItem(UpdateCheckoutItemDto checkoutItemVm)
+        {
+            var result = _checkoutService.UpdateCheckoutItem(checkoutItemVm);
+            if (result.IsSucessful) return Ok(result);
+            return BadRequest();
+        }
+
         [HttpGet]
         [Route("GetCheckoutItems")]
         public IActionResult GetCheckoutItems()

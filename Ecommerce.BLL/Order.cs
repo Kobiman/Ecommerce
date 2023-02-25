@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace Ecommerce.Models
 {
-    public class Order
+    public sealed class Order
     {
         public Order() { 
           CheckoutId = Guid.NewGuid().ToString();
-          CheckoutItems = new List<OrderItem>();
+          OrderItems = new List<OrderItem>();
         }
         public string CheckoutId { get; set; }
         public string FirstName { get; set; }
@@ -20,7 +20,11 @@ namespace Ecommerce.Models
         public string Email { get; set; }
         public string Location { get; set; }
         public string Status { get; set; }// Order Confirmed , Order Delivered, Order Rejected
-        public IList<OrderItem> CheckoutItems { get; set; }
+        public IList<OrderItem> OrderItems { get; set; }
 
+        public void Update(UpdateCheckoutItemDto edittedOrder)
+        {
+            Status = edittedOrder.Status;
+        }
     }
 }

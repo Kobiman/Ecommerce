@@ -1,4 +1,5 @@
 ﻿using Ecommerce.Models;
+using Ecommerce.Models.Dto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace Ecommerce.Services.Interfaces.Repository
 
         bool SaveCheckout(Order checkout);
 
-        bool UpdateCheckoutStatus(Order checkout);
+        bool UpdateCheckoutStatus(UpdateCheckoutItemDto checkout);
 
     }
 }
